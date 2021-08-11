@@ -1,0 +1,87 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_QUEUE_SIZE 5
+#define MAX_QUEUE_STRING_ZISE 10
+
+typedef struct {
+    int front;
+    int rear;
+    char data[MAX_QUEUE_SIZE][MAX_QUEUE_STRING_ZISE + 1]; // +1 is \0
+} CircularQueue;
+
+int find_mode(CircularQueue* q)
+{
+    float n = MAX_QUEUE_SIZE;
+    int i, j, freq, count = 1;
+    float modecount = 0;
+    char mode[MAX_QUEUE_STRING_ZISE + 1] = "\0";
+
+    for (i = 0; i < n; i++)
+    {
+        freq = 0;
+        for (j = i + 1; j < n; j++)
+        {
+            if (!strcmp(q->data[i], q->data[j]))
+                freq += 1;
+        }
+        if (freq >= count)
+        {
+            strcpy(mode, q->data[(i)]);
+            count = freq;
+        }
+
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        if (!strcmp(q->data[i], mode))
+            modecount++;
+
+    }
+    float modepersent = (modecount / n) * 100;
+
+    printf("Mode is %s, ModePersent is %0.1f\n", mode, modepersent);
+
+    return 0;
+}
+
+void init_queue(CircularQueue* q) 
+{
+    q->rear = 0;
+}
+
+void enqueue(CircularQueue* q, char item[])
+{
+
+    strcpy(q->data[q->rear], item);
+    q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
+}
+
+int main() 
+{
+    CircularQueue queue;
+    memset(queue.data, 0x00, sizeof(queue.data));
+
+    char arr[20][MAX_QUEUE_STRING_ZISE] = { "apple","apple","apple","apple","banana","banana" ,"banana" ,"banana" ,
+        "kiwi","kiwi", "kiwi", "kiwi", "cherry","cherry", "cherry", "cherry" };
+
+    int n = 20; // arr의 첫번째 []의 값과 같아야한다.
+
+    init_queue(&queue);
+    for (int i = 0; i < n; i++)
+    {
+        enqueue(&queue, arr[i]);
+
+        for (int j = 0; j < MAX_QUEUE_SIZE; j++)
+            printf("%s,", queue.data[j]);
+
+        printf("\n");
+
+        find_mode(&queue);
+    }
+    return 0;
+}
