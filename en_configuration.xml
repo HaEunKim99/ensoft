@@ -4,20 +4,26 @@
 	<applications>
 		<application>
 			<name>mc-ke-fdc.exe</name>
-			<path>C:\2.Magnachip\853\Release</path>
-			<argv></argv>
-			<monitor>Y</monitor>
-		</application>
-		<application>
-			<name>mc-ke-fdc.exe</name>
-			<path>D:\2.Magnachip\853\Release</path>
+			<path>C:\ensoft\bin</path>
 			<argv>-c H01</argv>
 			<monitor>N</monitor>
 		</application>
 		<application>
 			<name>mc-touch-control.exe</name>
-			<path>D:\2.Magnachip\853\Release</path>
-			<argv>COM1</argv>
+			<path>C:\ensoft\bin</path>
+			<argv>>COM1</argv>
+			<monitor>N</monitor>
+		</application>
+		<application>
+			<name>mc-ocr.exe</name>
+			<path>C:\ensoft\bin</path>
+			<argv></argv>
+			<monitor>N</monitor>
+		</application>
+		<application>
+			<name>mc-capture</name>
+			<path>C:\ensoft\bin</path>
+			<argv></argv>
 			<monitor>N</monitor>
 		</application>
 	</applications>
